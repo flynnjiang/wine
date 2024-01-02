@@ -454,6 +454,12 @@ HWND WINAPI DECLSPEC_HOTPATCH CreateWindowExW( DWORD exStyle, LPCWSTR className,
 {
     CREATESTRUCTW cs;
 
+    if (exStyle == 0x080800a0)
+    {
+	    FIXME("hack wechat shadow border issue.\n");
+	    return NULL;
+    }
+
     cs.lpCreateParams = data;
     cs.hInstance      = instance;
     cs.hMenu          = menu;
