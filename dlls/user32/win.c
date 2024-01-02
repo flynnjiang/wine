@@ -460,6 +460,12 @@ HWND WINAPI DECLSPEC_HOTPATCH CreateWindowExW( DWORD exStyle, LPCWSTR className,
 	    return NULL;
     }
 
+    if (style == 0x8c000000 && exStyle == 0)
+    {
+	    FIXME("hack lanxin shadow border issue.\n");
+	    return NULL;
+    }
+
     cs.lpCreateParams = data;
     cs.hInstance      = instance;
     cs.hMenu          = menu;
