@@ -1807,6 +1807,8 @@ static BOOL apply_window_pos( HWND hwnd, HWND insert_after, UINT swp_flags,
         return FALSE;
     }
 
+    TRACE("hwnd %p parent %p owner %p style=%08x ex_style=%08x\n", hwnd, win->parent, win->owner, win->dwStyle, win->dwExStyle);
+
     /* create or update window surface for top-level windows if the driver doesn't implement WindowPosChanging */
     if (!ret && new_surface && !IsRectEmpty( &visible_rect ) &&
         (!(get_window_long( hwnd, GWL_EXSTYLE ) & WS_EX_LAYERED) ||
@@ -3386,6 +3388,8 @@ BOOL set_window_pos( WINDOWPOS *winpos, int parent_x, int parent_y )
     UINT orig_flags;
     BOOL ret = FALSE;
     DPI_AWARENESS_CONTEXT context;
+
+    TRACE("hwnd %p hwndInsertAfter %p flags %08x\n", winpos->hwnd, winpos->hwndInsertAfter, winpos->flags);
 
     orig_flags = winpos->flags;
 
@@ -4989,6 +4993,8 @@ static WND *create_window_handle( HWND parent, HWND owner, UNICODE_STRING *name,
     win->dpi_awareness = awareness;
     set_user_handle_ptr( handle, &win->obj );
     if (is_winproc_unicode( win->winproc, !ansi )) win->flags |= WIN_ISUNICODE;
+
+    TRACE("hwnd %p parent %p owner %p\n", win->obj.handle, win->parent, win->owner);
     return win;
 }
 

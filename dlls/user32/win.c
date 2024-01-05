@@ -454,6 +454,7 @@ HWND WINAPI DECLSPEC_HOTPATCH CreateWindowExW( DWORD exStyle, LPCWSTR className,
 {
     CREATESTRUCTW cs;
 
+#if 0
     if (exStyle == 0x080800a0)
     {
 	    FIXME("hack wechat shadow border issue.\n");
@@ -465,6 +466,7 @@ HWND WINAPI DECLSPEC_HOTPATCH CreateWindowExW( DWORD exStyle, LPCWSTR className,
 	    FIXME("hack lanxin shadow border issue.\n");
 	    return NULL;
     }
+#endif
 
     cs.lpCreateParams = data;
     cs.hInstance      = instance;
